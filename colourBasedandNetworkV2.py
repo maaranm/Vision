@@ -18,12 +18,7 @@ yCentroidOne = 0
 yCentroidTwo = 0
 yCentroidThree = 0
 counter = 0
-lowH, lowS, lowV = 0
-highH, highS, highV = 0
 
-def nothing(x):
-    pass
-cv2.namedWindow('result')
 
 while(1):
     _,frame = camera_feed.read()
