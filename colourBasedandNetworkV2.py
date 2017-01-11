@@ -42,14 +42,9 @@ while(1):
         currentArea = cv2.contourArea(contour)
         x,y,w,h = cv2.boundingRect(bestContour)
         if currentArea > maximumArea:
-            if (x+x+w >= (2*(y+y+h) - 50)) and ((x+x+w <= (2*(y+y+h) + 50))):
-                secondBestContour = bestContour
-                bestContour = contour
-                maximumArea = currentArea
-            else:
-                table.putNumber("xValue",1000)
-                table.putNumber("yValue",1000)
-                print "NA"
+            secondBestContour = bestContour
+            bestContour = contour
+            maximumArea = currentArea
 
     if bestContour is not None:
         x,y,w,h = cv2.boundingRect(bestContour)
@@ -68,6 +63,13 @@ while(1):
             counter = 0
         xCentroid = (xCentroidOne+xCentroidTwo+xCentroidThree)/3
         yCentroid = (yCentroidOne+yCentroidTwo+yCentroidThree)/3
+
+        if xCentroid < 300:
+            xCentroid = 300-xCentroid
+        elif xCentroid > 300:
+            xCentroid = xCentroid-300
+        else:
+            xCentroid = 300
         table.putNumber("xValue",xCentroid)
         print xCentroidOne
 
