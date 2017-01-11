@@ -71,7 +71,7 @@ while(1):
         else:
             xCentroid = 300
         table.putNumber("xValue",xCentroid)
-        print xCentroidOne
+        print xCentroid
 
     #cv2.imshow('frame',frame)
     
