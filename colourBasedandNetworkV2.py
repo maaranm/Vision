@@ -24,8 +24,8 @@ while(1):
     _,frame = camera_feed.read()
     hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
 
-    lowerT = np.array([54,71,89])
-    upperT = np.array([96,255,255])
+    lowerT = np.array([33,1,239])
+    upperT = np.array([116,206,255])
 
     mask = cv2.inRange(hsv, lowerT, upperT)
 
@@ -48,7 +48,7 @@ while(1):
 
     if bestContour is not None:
         x,y,w,h = cv2.boundingRect(bestContour)
-        #cv2.rectangle(frame, (x,y),(x+w,y+h), (0,0,255), 3)
+        cv2.rectangle(frame, (x,y),(x+w,y+h), (0,0,255), 3)
         if counter == 0:
             xCentroidOne = (x+x+w)/2
             yCentroidOne = (y+y+h)/2
@@ -73,9 +73,9 @@ while(1):
         table.putNumber("xValue",xCentroid)
         print xCentroid
 
-    #cv2.imshow('frame',frame)
+    cv2.imshow('frame',frame)
     
-    #cv2.imshow('mask',mask)
+    cv2.imshow('mask',mask)
     
     k = cv2.waitKey(5) & 0xFF
     if k == 27:
