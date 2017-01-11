@@ -53,7 +53,7 @@ while(1):
 
     if bestContour is not None:
         x,y,w,h = cv2.boundingRect(bestContour)
-        cv2.rectangle(frame, (x,y),(x+w,y+h), (0,0,255), 3)
+        #cv2.rectangle(frame, (x,y),(x+w,y+h), (0,0,255), 3)
         if counter == 0:
             xCentroidOne = (x+x+w)/2
             yCentroidOne = (y+y+h)/2
@@ -69,7 +69,6 @@ while(1):
         xCentroid = (xCentroidOne+xCentroidTwo+xCentroidThree)/3
         yCentroid = (yCentroidOne+yCentroidTwo+yCentroidThree)/3
         table.putNumber("xValue",xCentroid)
-        table.putNumber("yValue",yCentroid)
         print xCentroidOne
 
     #cv2.imshow('frame',frame)
