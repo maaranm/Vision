@@ -72,9 +72,9 @@ while(1):
         table.putNumber("yValue",yCentroid)
         print xCentroidOne
 
-    cv2.imshow('frame',frame)
+    #cv2.imshow('frame',frame)
     
-    cv2.imshow('mask',mask)
+    #cv2.imshow('mask',mask)
     
     k = cv2.waitKey(5) & 0xFF
     if k == 27:
