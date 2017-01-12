@@ -35,20 +35,21 @@ while(1):
     mask = cv2.erode(mask,element)
 
     _,contours, hierarchy = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
-    maximumArea = 0
+    maximumArea = 50
     bestContour = None
     secondBestContour = None
     for contour in contours:
         currentArea = cv2.contourArea(contour)
         x,y,w,h = cv2.boundingRect(bestContour)
         if currentArea > maximumArea:
-            secondBestContour = bestContour
-            bestContour = contour
-            maximumArea = currentArea
+            if x+x+w>y+y+h:
+                secondBestContour = bestContour
+                bestContour = contour
+                maximumArea = currentArea
 
     if bestContour is not None:
         x,y,w,h = cv2.boundingRect(bestContour)
-        cv2.rectangle(frame, (x,y),(x+w,y+h), (0,0,255), 3)
+        #cv2.rectangle(frame, (x,y),(x+w,y+h), (0,0,255), 3)
         if counter == 0:
             xCentroidOne = (x+x+w)/2
             yCentroidOne = (y+y+h)/2
@@ -64,18 +65,17 @@ while(1):
         xCentroid = (xCentroidOne+xCentroidTwo+xCentroidThree)/3
         yCentroid = (yCentroidOne+yCentroidTwo+yCentroidThree)/3
 
-        if xCentroid < 300:
-            xCentroid = 300-xCentroid
-        elif xCentroid > 300:
-            xCentroid = xCentroid-300
-        else:
-            xCentroid = 300
+        xCentroid = xCentroid - 300
         table.putNumber("xValue",xCentroid)
+        table.putNumber("detected",1)
         print xCentroid
+    else:
+        table.putNumber("detected", 0)
+        print 'not detected'
 
-    cv2.imshow('frame',frame)
+    #cv2.imshow('frame',frame)
     
-    cv2.imshow('mask',mask)
+    #cv2.imshow('mask',mask)
     
     k = cv2.waitKey(5) & 0xFF
     if k == 27:
